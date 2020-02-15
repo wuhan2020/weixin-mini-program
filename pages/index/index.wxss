@@ -1,13 +1,54 @@
-.searchbar_wrapper{
-  position: absolute;
-  left: 3%;
-  top: 5%;
-  width: 85%;
-  height: 28px;
+.card_list{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.card_wrapper{
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  position: relative;
+  height: 70px;
+  margin: 5px 0px;
+}
+.card{
+  position: absolute;
+  width: 95%;
+  height: 70px;
+  background: #FFFFFF;
+  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+.card_title{
+  position: absolute;
+  left: 12.39%;
+  top: 14.29%;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: bold;
+  color: #000000;
+
+}
+
+.icon_arrow_ouline{
+  position: absolute;
+  left: 93.8%;
+  right: 2.82%;
+  top: 11.43%;
+  bottom: 54.29%;
+}
+
+.icon_arrow{
+  width: 8px;
+  height: 14px;
+}
+
+.card_face_frown{
+  position: absolute;
+  left: 2.82%;
+  top: 14.29%;
 }
 
 .searchbar_text{
