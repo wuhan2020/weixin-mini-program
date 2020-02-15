@@ -15,6 +15,12 @@ Page({
         days: "3",
         number: "15",
         rank: "1"
+      },
+      {
+        name: "安徽省第三人民医院",
+        days: "5",
+        number: "8",
+        rank: "6"
       }
     ]
     this.setData({

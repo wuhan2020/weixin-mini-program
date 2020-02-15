@@ -1,8 +1,94 @@
+.searchbar_wrapper{
+  position: absolute;
+  left: 3%;
+  top: 5%;
+  width: 85%;
+  height: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.searchbar_text{
+  position: absolute;
+  left: 8px;
+  top: 17.86%;
+  font-size: 12px;
+  line-height: 18px;
+  color: rgba(0, 0, 0, 0.25);
+}
+
+.searchbar_input{
+  position: absolute;
+  width: 80%;
+  height: 28px;
+  left: 0px;
+  top: 0px;
+  background: #FFFFFF;
+  border: 1px solid #D9D9D9;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.icon_search{
+  position: absolute;
+  left: 70%;
+  width: 12px;
+  height: 12px;
+}
+
+.location_wrapper{
+  position: absolute;
+  left: 70%;
+  top: 5%;
+  width: 30%;
+  height: 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.button_location{
+  background: #FFFFFF;
+  border-radius:0px;
+}
+
+.button_content{
+  height: 28px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:space-around;
+  background: #FFFFFF;
+  border: 1px solid #D9D9D9;
+  box-sizing: border-box;
+  border-radius: 4px;
+}
+
+.location_white{
+  width: 16px;
+  margin: 0px 3px;
+}
+
+.button_content_text{
+  margin: 0px 3px;
+  font-size: 14px;
+  line-height: 21px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+
 .card_list{
   display: flex;
   flex-direction: column;
   width: 100%;
 }
+
 .card_wrapper{
   display: flex;
   flex-direction: column;
@@ -11,6 +97,7 @@
   height: 70px;
   margin: 5px 0px;
 }
+
 .card{
   position: absolute;
   width: 95%;
