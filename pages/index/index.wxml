@@ -1,6 +1,6 @@
-<view class="container">
+<view>
   <view class="card_list">
-    <view class="card_wrapper">
+    <view class="card_wrapper" wx:for="{{hospitals}}">
       <view class="card">
         <view class="card_face_frown">
           <image 
@@ -9,7 +9,7 @@
           />
         </view>
         <view class="card_title">
-          安徽第一人民医院
+          {{item.name}}
         </view>
         <view class="icon_arrow_ouline">
           <image 
@@ -18,35 +18,10 @@
           />
         </view>
         <view class="card_content_desc">
-          过去5天共有<text style="color:#FF6440;">5</text>名患者经过此地
+          过去{{item.days}}天共有<text style="color:#FF6440;">{{item.number}}</text>名患者经过此地
         </view>
         <view class="card_content_infor">
-          在该城市排名第<text style="color:#FF6440;">5</text>
-        </view>
-      </view>
-    </view>
-    <view class="card_wrapper">
-      <view class="card">
-        <view class="card_face_frown">
-          <image 
-            class="card_face" 
-            src="/asserts/icons/face.svg"
-          />
-        </view>
-        <view class="card_title">
-          安徽第二人民医院
-        </view>
-        <view class="icon_arrow_ouline">
-          <image 
-            class="icon_arrow" 
-            src="/asserts/icons/arrow.svg"
-          />
-        </view>
-        <view class="card_content_desc">
-          过去10天共有<text style="color:#FF6440;">5</text>名患者经过此地
-        </view>
-        <view class="card_content_infor">
-          在该城市排名第<text style="color:#FF6440;">6</text>
+          在该城市排名第<text style="color:#FF6440;">{{item.rank}}</text>
         </view>
       </view>
     </view>
