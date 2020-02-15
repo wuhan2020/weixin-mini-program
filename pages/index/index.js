@@ -3,6 +3,39 @@ Page({
     hospitals: [],
   },
   onLoad: function () {
+    wx.getSetting({
+      success(res) {
+        if (!res.authSetting['scope.userLocation']) {
+          wx.authorize({
+            scope: 'scope.userLocation',
+            success() {
+              wx.getLocation({
+                type: 'wgs84',
+                success(res) {
+                  wx.showToast({
+                    title: res.errMsg,
+                  })
+                }
+              })
+            },
+            fail(){
+              wx.showToast({
+                title: '未获取到位置授权,将选择默认定位',
+              })
+            }
+          })
+        }else{
+          wx.getLocation({
+            type: 'wgs84',
+            success(res) {
+              wx.showToast({
+                title: res.errMsg,
+              })
+            }
+          })
+        }
+      }
+    })
     var hospitals=[
       {
         name:"安徽省第一人民医院",
@@ -26,5 +59,17 @@ Page({
     this.setData({
       hospitals: hospitals
     })
+  },
+  searchbar_click: function () {
+    console.log("should toast search page");
+  },
+  button_location_click: function () {
+    console.log("should toast choose location page");
+  },
+  button_screen_click: function () {
+    console.log("should toast screen page");
+  },
+  hospital_detail_click: function () {
+    console.log("should go to hospital detail page");
   }
 })
