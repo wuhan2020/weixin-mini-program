@@ -1,13 +1,54 @@
-<!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
-  </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="card_list">
+    <view class="card_wrapper">
+      <view class="card">
+        <view class="card_face_frown">
+          <image 
+            class="card_face" 
+            src="/asserts/icons/face.svg"
+          />
+        </view>
+        <view class="card_title">
+          安徽第一人民医院
+        </view>
+        <view class="icon_arrow_ouline">
+          <image 
+            class="icon_arrow" 
+            src="/asserts/icons/arrow.svg"
+          />
+        </view>
+        <view class="card_content_desc">
+          过去5天共有<text style="color:#FF6440;">5</text>名患者经过此地
+        </view>
+        <view class="card_content_infor">
+          在该城市排名第<text style="color:#FF6440;">5</text>
+        </view>
+      </view>
+    </view>
+    <view class="card_wrapper">
+      <view class="card">
+        <view class="card_face_frown">
+          <image 
+            class="card_face" 
+            src="/asserts/icons/face.svg"
+          />
+        </view>
+        <view class="card_title">
+          安徽第二人民医院
+        </view>
+        <view class="icon_arrow_ouline">
+          <image 
+            class="icon_arrow" 
+            src="/asserts/icons/arrow.svg"
+          />
+        </view>
+        <view class="card_content_desc">
+          过去10天共有<text style="color:#FF6440;">5</text>名患者经过此地
+        </view>
+        <view class="card_content_infor">
+          在该城市排名第<text style="color:#FF6440;">6</text>
+        </view>
+      </view>
+    </view>
   </view>
 </view>
