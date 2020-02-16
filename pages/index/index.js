@@ -1,5 +1,9 @@
 Page({
   data: {
+    show_top:false,
+    input_focus: false,
+    input_model: '搜索地点',
+    input_info: '输入',
     hospitals: [],
   },
   onLoad: function () {
@@ -12,9 +16,7 @@ Page({
               wx.getLocation({
                 type: 'wgs84',
                 success(res) {
-                  wx.showToast({
-                    title: res.errMsg,
-                  })
+                  console.log(res)
                 }
               })
             },
@@ -28,9 +30,7 @@ Page({
           wx.getLocation({
             type: 'wgs84',
             success(res) {
-              wx.showToast({
-                title: res.errMsg,
-              })
+              console.log(res)
             }
           })
         }
@@ -60,10 +60,29 @@ Page({
       hospitals: hospitals
     })
   },
+  input_tap() {
+    this.setData({
+      input_focus: true,
+      input_info: ''
+    });
+  },
+  input_blur(e) {
+    this.setData({
+      input_info: e.detail.value || '输入'
+    });
+  },
   searchbar_click: function () {
+    var show_top=this.data.show_top;
+    this.setData({
+      show_top: !show_top
+    })
     console.log("should toast search page");
   },
   button_location_click: function () {
+    var show_top = this.data.show_top;
+    this.setData({
+      show_top: !show_top
+    })
     console.log("should toast choose location page");
   },
   button_screen_click: function () {
@@ -71,5 +90,8 @@ Page({
   },
   hospital_detail_click: function () {
     console.log("should go to hospital detail page");
-  }
+  },
+  float_click: function () {
+    console.log("should float");
+  },
 })
