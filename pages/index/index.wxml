@@ -1,8 +1,8 @@
 <view>
   <movable-area style="height:100%;width:100%;" scale-area>
     <map 
-      id="map" longitude="113.324520" latitude="23.099994" 
-      scale="14" show-location style="width:100%;height:50vh;"
+      id="map" longitude="{{longitude}}" latitude="{{latitude}}" 
+      scale="18" show-location style="width:100%;height:80vh;"
     >
       <cover-view class="searchbar_wrapper" aria-role="button" bindtap='searchbar_click'>
         <cover-view class="searchbar_input"></cover-view>
@@ -19,7 +19,7 @@
               class="location_white" 
               src="/asserts/icons/location_white.png"
             />
-            <cover-view class="button_location_text">选择城市</cover-view>
+            <cover-view class="button_location_text">定位</cover-view>
           </cover-view>
         </cover-view>
       </cover-view>
@@ -30,95 +30,97 @@
         </cover-view>
       </cover-view>
     </map>
-    <movable-view style="margin-top:300px;width:100%;" direction="vertical" inertia="{{true}}" damping="{{10}}">
-      <view style="background:white;margin-top:60px;">
+    <movable-view style="margin-top:250px;width:100%;" direction="vertical" inertia="{{true}}" damping="{{10}}">
+      <view style="background:white;margin-top:75px;height:100vh">
         <view class="swipper">
           <view class="swipper_rectangle"/>
           <view class="swipper_rectangle"/>
         </view>
-        <view class="glance_view_wrapper">
-          <view class="glance_view_title">
-            <text style="color:#FF6440">5</text>公里内感染风险
-          </view>
-          <view class="button_screen" aria-role="button" bindtap='button_screen_click'>
-            <view class="button_screen_content">
-              <image 
-                class="screen" 
-                src="/asserts/icons/screen.svg"
-              />
-              <view class="button_screen_text">筛选</view>
+        <view hidden="{{!show_glance}}">
+          <view class="glance_view_wrapper">
+            <view class="glance_view_title">
+              <text style="color:#FF6440">{{data_glance.boundary}}</text>公里内感染风险
             </view>
-          </view>
-          <view class="glance_view_desc">
-            根据已收35例确诊患者｜今日本市共计50例确诊患者
-          </view>
-          <view class="circle_wrapper">
-            <image
-                class="circle_inner" 
-                src="/asserts/icons/circle_inner.svg"
-            />
-          </view>
-          <view class="circle_wrapper">
-            <image
-              class="circle_outter" 
-              src="/asserts/icons/circle_outter.svg"
-            />
-          </view>
-          <view class="text_postion_infected">
-            感染地点
-          </view>
-          <view class="people_wrapper">
-            <image
-              class="people" 
-              src="/asserts/icons/people.svg"
-            />
-          </view>
-          <view class="text_infecter_passed">
-            感染者经过
-          </view>
-          <view class="text_sum">
-            累计
-          </view>
-          <view class="text_position_sum">
-            20个
-          </view>
-          <view class="text_infecter_sum">
-            200个
-          </view>
-          <view class="text_new">
-            X天新增
-          </view>
-          <view class="text_position_new">
-            +7
-          </view>
-          <view class="text_infecter_new">
-            +200
-          </view>
+            <view class="button_screen" aria-role="button" bindtap='button_screen_click'>
+              <view class="button_screen_content">
+                <image 
+                  class="screen" 
+                  src="/asserts/icons/screen.svg"
+                />
+                <view class="button_screen_text">筛选</view>
+              </view>
+            </view>
+            <view class="glance_view_desc">
+              根据已收{{data_glance.infected_total}}例确诊患者｜今日本市共计{{data_glance.infected_today}}例确诊患者
+            </view>
+            <view class="circle_wrapper">
+              <image
+                  class="circle_inner" 
+                  src="/asserts/icons/circle_inner.svg"
+              />
+            </view>
+            <view class="circle_wrapper">
+              <image
+                class="circle_outter" 
+                src="/asserts/icons/circle_outter.svg"
+              />
+            </view>
+            <view class="text_postion_infected">
+              感染地点
+            </view>
+            <view class="people_wrapper">
+              <image
+                class="people" 
+                src="/asserts/icons/people.svg"
+              />
+            </view>
+            <view class="text_infecter_passed">
+              感染者经过
+            </view>
+            <view class="text_sum">
+              累计
+            </view>
+            <view class="text_position_sum">
+              {{data_glance.infected_position_total}}个
+            </view>
+            <view class="text_infecter_sum">
+              {{data_glance.infected_position_total}}个
+            </view>
+            <view class="text_new">
+              {{data_glance.days}}天新增
+            </view>
+            <view class="text_position_new">
+              +{{data_glance.infected_position_new}}
+            </view>
+            <view class="text_infecter_new">
+              +{{data_glance.infected_position_new}}
+            </view>
 
-        </view>
-        <view class="card_list">
-          <view class="card_wrapper" wx:for="{{hospitals}}">
-            <view class="card" bindtap='hospital_detail_click'>
-              <view class="card_face_frown">
-                <image 
-                  class="card_face" 
-                  src="/asserts/icons/face.svg"
-                />
-              </view>
-              <view class="card_title">
-                {{item.name}}
-              </view>
-              <view class="icon_arrow_ouline">
-                <image 
-                  class="icon_arrow" 
-                  src="/asserts/icons/arrow.svg"
-                />
-              </view>
-              <view class="card_content_desc">
-                过去{{item.days}}天共有<text style="color:#FF6440;">{{item.number}}</text>名患者经过此地
-              </view>
-              <view class="card_content_infor">
-                在该城市排名第<text style="color:#FF6440">{{item.rank}}</text>
+          </view>
+          <view class="card_list">
+            <view class="card_wrapper" wx:for="{{data_glance.special_positions}}">
+              <view class="card" bindtap='hospital_detail_click'>
+                <view class="card_face_frown">
+                  <image 
+                    class="card_face" 
+                    src="/asserts/icons/face.svg"
+                  />
+                </view>
+                <view class="card_title">
+                  {{item.name}}
+                </view>
+                <view class="icon_arrow_ouline">
+                  <image 
+                    class="icon_arrow" 
+                    src="/asserts/icons/arrow.svg"
+                  />
+                </view>
+                <view class="card_content_desc">
+                  过去5天共有<text style="color:#FF6440;">{{item.number}}</text>名患者经过此地
+                </view>
+                <view class="card_content_infor">
+                  在该城市排名第<text style="color:#FF6440">{{item.rank}}</text>
+                </view>
               </view>
             </view>
           </view>
