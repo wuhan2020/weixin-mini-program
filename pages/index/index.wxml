@@ -2,7 +2,7 @@
   <movable-area style="height:100%;width:100%;" scale-area>
     <map 
       id="map" longitude="{{longitude}}" latitude="{{latitude}}" 
-      scale="18" show-location style="width:100%;height:80vh;"
+      scale="8" show-location enable-zoom style="width:100%;height:80vh;"
     >
       <cover-view class="searchbar_wrapper" aria-role="button" bindtap='searchbar_click'>
         <cover-view class="searchbar_input"></cover-view>
@@ -51,7 +51,7 @@
               </view>
             </view>
             <view class="glance_view_desc">
-              根据已收{{data_glance.infected_total}}例确诊患者｜今日本市共计{{data_glance.infected_today}}例确诊患者
+              根据已收集的不完全确诊患者信息统计
             </view>
             <view class="circle_wrapper">
               <image
@@ -84,16 +84,16 @@
               {{data_glance.infected_position_total}}个
             </view>
             <view class="text_infecter_sum">
-              {{data_glance.infected_position_total}}个
+              {{data_glance.infected_passed_total}}个
             </view>
             <view class="text_new">
-              {{data_glance.days}}天新增
+              7天新增
             </view>
             <view class="text_position_new">
               +{{data_glance.infected_position_new}}
             </view>
             <view class="text_infecter_new">
-              +{{data_glance.infected_position_new}}
+              +{{data_glance.infected_passed_new}}
             </view>
 
           </view>
