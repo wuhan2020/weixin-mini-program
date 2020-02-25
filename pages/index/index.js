@@ -1,39 +1,63 @@
 Page({
   data: {
-    longitude: "113.324520",
-    latitude: "23.099994",
+    longitude: "114.063411",
+    latitude: "22.55899",
+    context: null,
     show_top: false,
     show_glance: true,
     data_glance: {},
+    markers:[],
     input_focus: false,
     input_model: '搜索地点',
   },
   onLoad: function () {
     var that=this;
-    var boundary=150;
+    that.fetch_data();
+  },
+  fetch_data: function (){
+    var that = this;
+    var context = wx.createMapContext("map", that);
+    var boundary = 200;
     wx.request({
-      url: 'http://api.hypertrons.io:7002/patient_detail/get_nearby_information',
-      data:{
-        longitude:that.data.longitude,
-        latitude:that.data.latitude,
+      url: 'https://wechat-mini.opensource-service.cn/patient_detail/get_nearby_information',
+      data: {
+        longitude: that.data.longitude,
+        latitude: that.data.latitude,
         distance: boundary
       },
       success(res) {
-        var data=res.data;
-        var infected_position_total=0;
-        var infected_passed_total=0;
-        var infected_position_new=0;
-        var infected_passed_new=0;
-        var positions=data.positions;
-        for(var index in positions){
-          var position=positions[index];
-          var distance=position.distance;
-          if (distance <= boundary){
-            infected_position_total+=1;
-            infected_position_new+=1;
+        var markers = []
+        var data = res.data;
+        var infected_position_total = 0;
+        var infected_passed_total = 0;
+        var infected_position_new = 0;
+        var infected_passed_new = 0;
+        var positions = data.positions;
+        for (var index in positions) {
+          var position = positions[index];
+          var distance = position.distance;
+          if (distance <= boundary) {
+            infected_position_total += 1;
+            infected_position_new += 1;
             infected_passed_total += position.infected_people_total;
             infected_passed_new += position.infected_people_new;
-          }        
+          }
+          var marker = {
+            id: position.rank,
+            latitude: position.latitude,
+            longitude: position.longitude,
+            title: position.name
+          }
+          if (position.risk == "normal") {
+            marker.iconPath = "/asserts/icons/risk_map_normal.png"
+          }
+          else if (position.risk == "high") {
+            marker.iconPath = "/asserts/icons/risk_map_high.png"
+          }
+          else {
+            marker.iconPath = "/asserts/icons/risk_map_extreme.png"
+          }
+          markers.push(marker);
         }
         var data_glance = {
           special_positions: data["special_positions"],
@@ -46,10 +70,14 @@ Page({
         }
         that.setData({
           data_glance: data_glance,
+          markers: markers
+        })
+        context.moveToLocation({
+          longitude: that.data.longitude,
+          latitude: that.data.latitude,
         })
       }
     })
-
   },
   input_tap() {
     this.setData({
@@ -66,11 +94,12 @@ Page({
     var that = this;
     wx.chooseLocation({
       success: function (res) {
-        console.log(res)
+        console.log(res);
         that.setData({
           longitude: res.longitude,
           latitude: res.latitude
         })
+        that.fetch_data();
       },
     })
   },
@@ -89,6 +118,7 @@ Page({
                     longitude: res.longitude,
                     latitude: res.latitude
                   })
+                  that.fetch_data();
                 }
               })
             },
@@ -106,6 +136,7 @@ Page({
                 longitude: res.longitude,
                 latitude: res.latitude
               })
+              that.fetch_data();
             }
           })
         }

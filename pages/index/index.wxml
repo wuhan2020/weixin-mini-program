@@ -1,8 +1,8 @@
 <view>
   <movable-area style="height:100%;width:100%;" scale-area>
     <map 
-      id="map" longitude="{{longitude}}" latitude="{{latitude}}" 
-      scale="8" show-location enable-zoom style="width:100%;height:80vh;"
+      id="map" longitude="{{longitude}}" latitude="{{latitude}}" markers="{{markers}}"
+      scale="10" show-location enable-zoom style="width:100%;height:80vh;"
     >
       <cover-view class="searchbar_wrapper" aria-role="button" bindtap='searchbar_click'>
         <cover-view class="searchbar_input"></cover-view>
@@ -30,7 +30,7 @@
         </cover-view>
       </cover-view>
     </map>
-    <movable-view style="margin-top:250px;width:100%;" direction="vertical" inertia="{{true}}" damping="{{10}}">
+    <movable-view style="margin-top:250px;width:100%;" direction="vertical" inertia="{{true}}">
       <view style="background:white;margin-top:75px;height:100vh">
         <view class="swipper">
           <view class="swipper_rectangle"/>
